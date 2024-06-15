@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>PET HEALTH CARE</title>
+</head>
+<body>
+<h1>My Clinics:</h1>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+    </tr>
+
+    <tr th:if="${clinics.empty}">
+        <td colspan="4"> No Clinics </td>
+    </tr>
+    <tr th:each="clinic : ${clinics}">
+        <td><a th:href="@{/clinic/id/{id}(id=${clinic.id})}"><span th:text="${clinic.name}"> </span></a></td>
+        <td><span th:text="${clinic.email}"> </span></td>
+        <td><span th:text="${clinic.phone}"> </span></td>
+        <td><span th:text="${clinic.address}"> </span></td>
+    </tr>
+</table>
+</body>
+</html>
