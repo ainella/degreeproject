@@ -40,7 +40,7 @@ public class ClinicController {
     }
     @PostMapping("/")
     public String saveClinic(Model model, @ModelAttribute Clinic clinic) {
-        Clinic clinic = clinicService.saveClinic();
+        clinicService.saveClinic(clinic);
         return "redirect:/clinic/id/" + clinic.getId().toString();
     }
 }
