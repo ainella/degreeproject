@@ -3,9 +3,10 @@ package com.ainella.petclinic.services;
 import com.ainella.petclinic.models.Clinic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class ClinicService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
