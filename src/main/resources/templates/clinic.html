@@ -7,28 +7,24 @@
 
 <div class="container">
     <h1>Clinic</h1>
-    <form method="post" th:action="@{/clinic/}" th:object="${clinic}">
-        <input type="hidden" th:field="*{id}">
-        <table>
-            <tr>
-                <th>Name</th>
-                <td><input type="text" th:field="*{name}"></td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td><input type="text" th:field="*{email}"></td>
-            </tr>
-            <tr>
-                <th>Phone</th>
-                <td><input type="text" th:field="*{phone}"></td>
-            </tr>
-            <tr>
-                <th>Address</th>
-                <td><input type="text" th:field="*{address}"></td>
-            </tr>
-        </table>
-        <input type="submit" value="Update">
-    </form>
+    <table>
+        <tr>
+            <th>Name</th>
+            <td><span th:text="${clinic.name}"></span></td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td><span th:text="${clinic.email}"></span></td>
+        </tr>
+        <tr>
+            <th>Phone</th>
+            <td><span th:text="${clinic.phone}"></span></td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td><span th:field="${clinic.address}"></span></td>
+        </tr>
+    </table>
 </div>
 
 <div th:replace="~{fragments/footer :: footer}"></div>

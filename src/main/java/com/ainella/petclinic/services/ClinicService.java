@@ -24,4 +24,8 @@ public class ClinicService {
                 "set name = ?, email = ?,phone = ?, address = ?\n" +
                 "where id = ?",clinic.getName(),clinic.getEmail(),clinic.getPhone(),clinic.getAddress(),clinic.getId());
     }
+    public List<Clinic> getListByOwnerId(Integer ownerId){
+        String query = "select * from clinic where owner_id = ? ";
+        return jdbcTemplate.query(query,new Clinic.Mapper(), ownerId);
+    }
 }

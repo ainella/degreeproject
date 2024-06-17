@@ -31,8 +31,9 @@
         <input type="submit" value="Update">
     </form>
     <h2>My Pets:</h2>
-        <table>
-            <tr>
+        <table class="table table-bordered table-striped">
+
+        <tr>
                 <th>Name</th>
                 <th>Species</th>
                 <th>Breed</th>
@@ -49,6 +50,26 @@
                 <td><span th:text="${pet.birthDay}"> </span></td>
             </tr>
         </table>
+
+    <h2>My Clinics:</h2>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+        </tr>
+
+        <tr th:if="${clinics.empty}">
+            <td colspan="4"> No Clinics </td>
+        </tr>
+        <tr th:each="clinic : ${clinics}">
+            <td><a th:href="@{/clinic/id/{id}(id=${clinic.id})}"><span th:text="${clinic.name}"> </span></a></td>
+            <td><span th:text="${clinic.email}"> </span></td>
+            <td><span th:text="${clinic.phone}"> </span></td>
+            <td><span th:text="${clinic.address}"> </span></td>
+        </tr>
+    </table>
 </div>
 
 <div th:replace="~{fragments/footer :: footer}"></div>

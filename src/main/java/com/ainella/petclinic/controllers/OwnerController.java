@@ -1,8 +1,11 @@
 package com.ainella.petclinic.controllers;
 
+import com.ainella.petclinic.models.Clinic;
 import com.ainella.petclinic.models.Owner;
 import com.ainella.petclinic.models.Pet;
+import com.ainella.petclinic.services.ClinicService;
 import com.ainella.petclinic.services.OwnerService;
+import com.ainella.petclinic.services.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -24,6 +27,13 @@ public class OwnerController {
     @Autowired
     private OwnerService ownerService;
 
+    @Autowired
+    private PetService petService;
+
+    @Autowired
+    private ClinicService clinicService;
+
+
     @GetMapping()
     public String getOwner(Principal principal, Model model) {
         Owner owner = ownerService.getOwnerByUsername(principal.getName());
@@ -33,13 +43,11 @@ public class OwnerController {
         model.addAttribute("owner",owner);
         model.addAttribute("username",principal.getName());
 
-        String petsQuery = "select p.*, s.\"name\" species_name \n" +
-                "from pets p\n" +
-                "join species s on s.id = p.species_id \n" +
-                "where p.owner_id = ?";
-        List<Pet> pets = jdbcTemplate.query(petsQuery, new Pet.Mapper(), owner.getId());
+        List<Pet> pets = petService.getPetsByOwnerId(owner.getId());
         model.addAttribute("pets",pets);
 
+        List<Clinic> clinics = clinicService.getListByOwnerId(owner.getId());
+        model.addAttribute("clinics",clinics);
         return "owner";
     }
     @PostMapping()
