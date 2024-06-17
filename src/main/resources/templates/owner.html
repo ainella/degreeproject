@@ -1,52 +1,57 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>PET HEALTH CARE</title>
-</head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="~{fragments/head :: head}"></head>
 <body>
-<h2>My Profile</h2>
-<span th:text="${username}"> </span>
-<form method="post" th:action="@{/owner/}" th:object="${owner}">
-    <input type="hidden" th:field="*{id}">
-    <table>
-        <tr>
-            <th>Fullname</th>
-            <td><input type="text" th:field="*{fullname}"></td>
-        </tr>
-        <tr>
-            <th>Address</th>
-            <td><input type="text" th:field="*{address}"></td>
-        </tr>
-        <tr>
-            <th>Phone</th>
-            <td><input type="text" th:field="*{phone}"></td>
-        </tr>
-        <tr>
-            <th>Email</th>
-            <td><input type="text" th:field="*{email}"></td>
-        </tr>
-    </table>
-    <input type="submit" value="Update">
-</form>
-<h2>My Pets:</h2>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Species</th>
-            <th>Breed</th>
-            <th>Birth Date</th>
-        </tr>
 
-        <tr th:if="${pets.empty}">
-            <td colspan="4"> No Pets </td>
-        </tr>
-        <tr th:each="pet : ${pets}">
-            <td><a th:href="@{/pet/id/{id}(id=${pet.id})}"><span th:text="${pet.name}"> </span></a></td>
-            <td><span th:text="${pet.speciesName}"> </span></td>
-            <td><span th:text="${pet.breed}"> </span></td>
-            <td><span th:text="${pet.birthDay}"> </span></td>
-        </tr>
-    </table>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="container">
+    <h1>Personal Account</h1>
+    <span th:text="${username}"> </span>
+    <form method="post" th:action="@{/owner}" th:object="${owner}">
+        <input type="hidden" th:field="*{id}">
+        <table>
+            <tr>
+                <th>Fullname</th>
+                <td><input type="text" th:field="*{fullname}"></td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td><input type="text" th:field="*{address}"></td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td><input type="text" th:field="*{phone}"></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><input type="text" th:field="*{email}"></td>
+            </tr>
+        </table>
+        <input type="submit" value="Update">
+    </form>
+    <h2>My Pets:</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Species</th>
+                <th>Breed</th>
+                <th>Birth Date</th>
+            </tr>
+
+            <tr th:if="${pets.empty}">
+                <td colspan="4"> No Pets </td>
+            </tr>
+            <tr th:each="pet : ${pets}">
+                <td><a th:href="@{/pet/id/{id}(id=${pet.id})}"><span th:text="${pet.name}"> </span></a></td>
+                <td><span th:text="${pet.speciesName}"> </span></td>
+                <td><span th:text="${pet.breed}"> </span></td>
+                <td><span th:text="${pet.birthDay}"> </span></td>
+            </tr>
+        </table>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
 </body>
 </html>

@@ -1,31 +1,37 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>PET HEALTH CARE</title>
-</head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="~{fragments/head :: head}"></head>
 <body>
-<form method="post" th:action="@{/clinic/}" th:object="${clinic}">
-    <input type="hidden" th:field="*{id}">
-    <table>
-        <tr>
-            <th>Name</th>
-            <td><input type="text" th:field="*{name}"></td>
-        </tr>
-        <tr>
-            <th>Email</th>
-            <td><input type="text" th:field="*{email}"></td>
-        </tr>
-        <tr>
-            <th>Phone</th>
-            <td><input type="text" th:field="*{phone}"></td>
-        </tr>
-        <tr>
-            <th>Address</th>
-            <td><input type="text" th:field="*{address}"></td>
-        </tr>
-    </table>
-    <input type="submit" value="Update">
-</form>
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="container">
+    <h1>Clinic</h1>
+    <form method="post" th:action="@{/clinic/}" th:object="${clinic}">
+        <input type="hidden" th:field="*{id}">
+        <table>
+            <tr>
+                <th>Name</th>
+                <td><input type="text" th:field="*{name}"></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><input type="text" th:field="*{email}"></td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td><input type="text" th:field="*{phone}"></td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td><input type="text" th:field="*{address}"></td>
+            </tr>
+        </table>
+        <input type="submit" value="Update">
+    </form>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
 </body>
 </html>

@@ -24,7 +24,7 @@ public class ClinicController {
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private ClinicService clinicService;
-    @GetMapping("/")
+    @GetMapping("")
     public  String getList(Model model) {
         List<Clinic> clinics = clinicService.getList();
         model.addAttribute("clinics",clinics);

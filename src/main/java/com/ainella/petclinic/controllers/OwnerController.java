@@ -24,8 +24,8 @@ public class OwnerController {
     @Autowired
     private OwnerService ownerService;
 
-    @GetMapping("/")
-    public String getOwnerById(Principal principal, Model model) {
+    @GetMapping()
+    public String getOwner(Principal principal, Model model) {
         Owner owner = ownerService.getOwnerByUsername(principal.getName());
         if (owner == null) {
             throw new ResponseStatusException(NOT_FOUND, "Unable to find owner");
@@ -42,12 +42,12 @@ public class OwnerController {
 
         return "owner";
     }
-    @PostMapping("/")
+    @PostMapping()
     public String saveOwner(Model model, @ModelAttribute Owner owner) {
         jdbcTemplate.update("update owners \n" +
                 "set fullname = ?, address = ?,phone = ?, email = ?\n" +
                 "where id = ?",owner.getFullname(),owner.getAddress(),owner.getPhone(),owner.getEmail(),owner.getId());
-        return "redirect:/owner/id/" + owner.getId().toString();
+        return "redirect:/owner";
     }
 
 }

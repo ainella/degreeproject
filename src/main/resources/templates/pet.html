@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>PET HEALTH CARE</title>
-</head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="~{fragments/head :: head}"></head>
 <body>
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="container">
+    <h1>Pet Data</h1>
+
     <form method="post" th:action="@{/pet/}" th:object="${pet}">
         <input type="hidden" th:field="*{id}">
         <input type="hidden" th:field="*{ownerId}">
@@ -30,5 +33,9 @@
         </table>
         <input type="submit" value="Update">
     </form>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
 </body>
 </html>
