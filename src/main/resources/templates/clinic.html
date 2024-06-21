@@ -25,6 +25,8 @@
             <td><span th:field="${clinic.address}"></span></td>
         </tr>
     </table>
+    <a th:href="@{/appointment?clinicId={id}(id=${clinic.id})}" class="btn btn-primary">Make an appointment</a>
+
 </div>
 
 <div th:replace="~{fragments/footer :: footer}"></div>
