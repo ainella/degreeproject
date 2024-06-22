@@ -1,8 +1,10 @@
 package com.ainella.petclinic.controllers;
 
+import com.ainella.petclinic.models.Appointment;
 import com.ainella.petclinic.models.Clinic;
 import com.ainella.petclinic.models.Owner;
 import com.ainella.petclinic.models.Pet;
+import com.ainella.petclinic.services.AppointmentService;
 import com.ainella.petclinic.services.ClinicService;
 import com.ainella.petclinic.services.OwnerService;
 import com.ainella.petclinic.services.PetService;
@@ -33,6 +35,8 @@ public class OwnerController {
     @Autowired
     private ClinicService clinicService;
 
+    @Autowired
+    private AppointmentService appointmentService;
 
     @GetMapping()
     public String getOwner(Principal principal, Model model) {
@@ -45,11 +49,24 @@ public class OwnerController {
 
         List<Pet> pets = petService.getPetsByOwnerId(owner.getId());
         model.addAttribute("pets",pets);
+        List<Appointment> appointments = appointmentService.getListByOwnerId(owner.getId());
+        model.addAttribute("appointments",appointments);
 
         List<Clinic> clinics = clinicService.getListByOwnerId(owner.getId());
         model.addAttribute("clinics",clinics);
         return "owner";
     }
+
+    @GetMapping("/clinic/id/{id}")
+    public String getMyClinic(Principal principal,@PathVariable("id")Integer id, Model model)
+    {
+        Clinic clinic = clinicService.getClinic(id);
+        model.addAttribute("clinic",clinic);
+        List<Appointment> appointments = appointmentService.getListByClinicId(id);
+        model.addAttribute("appointments",appointments);
+        return "my_clinic";
+    }
+
     @PostMapping()
     public String saveOwner(Model model, @ModelAttribute Owner owner) {
         jdbcTemplate.update("update owners \n" +

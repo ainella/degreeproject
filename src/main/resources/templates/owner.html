@@ -51,6 +51,30 @@
             </tr>
         </table>
 
+    <h2>My Appointments</h2>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>#</th>
+            <th>Pet Name</th>
+            <th>Clinic Name</th>
+            <th>Date</th>
+            <th>Reason</th>
+        </tr>
+
+        <tr th:if="${appointments.empty}">
+            <td colspan="4"> No Appointments </td>
+        </tr>
+        <tr th:each="appointment : ${appointments}">
+            <td><a th:href="@{/appointment/id/{id}(id=${appointment.id})}"><span th:text="${appointment.id}"> </span></a></td>
+            <td><span th:text="${appointment.petName}"> </span></td>
+            <td><a th:href="@{/clinic/id/{id}(id=${appointment.clinicId})}"><span th:text="${appointment.clinicName}"> </span></a></td>
+            <td><span th:text="${appointment.date}"> </span></td>
+            <td><span th:text="${appointment.reason}"> </span></td>
+            <td> <a th:href="@{/appointment/id/{id}/delete(id=${appointment.id})}"> Cancel</a></td>
+        </tr>
+
+    </table>
+
     <h2>My Clinics:</h2>
     <table class="table table-bordered table-striped">
         <tr>

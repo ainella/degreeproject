@@ -29,6 +29,28 @@
         </table>
         <input type="submit" value="Update">
     </form>
+
+    <h2>Appointments</h2>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>#</th>
+            <th>Species</th>
+            <th>Pet Name</th>
+            <th>Date</th>
+            <th>Reason</th>
+        </tr>
+
+        <tr th:if="${appointments.empty}">
+            <td colspan="5"> No Appointments </td>
+        </tr>
+        <tr th:each="appointment : ${appointments}">
+            <td><a th:href="@{/reception/appointmentId/{id}(id=${appointment.id})}"><span th:text="${appointment.id}"> </span></a></td>
+            <td><span th:text="${appointment.speciesName}"> </span></td>
+            <td><span th:text="${appointment.petName}"> </span></td>
+            <td><span th:text="${appointment.date}"> </span></td>
+            <td><span th:text="${appointment.reason}"> </span></td>
+        </tr>
+    </table>
 </div>
 
 <div th:replace="~{fragments/footer :: footer}"></div>

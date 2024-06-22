@@ -38,6 +38,22 @@ public class AppointmentController {
         return "appointment";
     }
 
+    @GetMapping("/id/{id}")
+    public String getAppointment(Principal principal,Model model,@PathVariable("id") Integer id){
+        Integer ownerId = ownerService.getOwnerIdByUsername(principal.getName());
+        Appointment appointment = appointmentService.getAppointment(id);
+        model.addAttribute("appointment",appointment);
+        model.addAttribute("pets",petService.getPetsByOwnerId(ownerId));
+        return "appointment";
+    }
+
+    @GetMapping("/id/{id}/delete")
+    public String removeAppointment(Principal principal, Model model,@PathVariable("id") Integer id){
+        appointmentService.deleteAppointment(id);
+        return "redirect:/owner";
+    }
+
+
     @PostMapping()
     public String saveAppointment(Model model, @ModelAttribute Appointment appointment) {
         appointmentService.saveAppointment(appointment);
