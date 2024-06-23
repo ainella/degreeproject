@@ -7,31 +7,42 @@
 
 <div class="container">
     <h1>Pet Data</h1>
-
-    <form method="post" th:action="@{/pet/}" th:object="${pet}">
+    <form class="form-narrow form-horizontal" method="post" th:action="@{/pet}" th:object="${pet}">
         <input type="hidden" th:field="*{id}">
         <input type="hidden" th:field="*{ownerId}">
-        <table>
-            <tr>
-                <th>Name</th>
-                <td><input type="text" th:field="*{name}"></td>
-            </tr>
-            <tr>
-                <th>Species</th>
-                <td><select  th:field="*{speciesId}">
-                    <option  th:each="s : ${species}" th:value="${s.id}" th:text="${s.name}"/>
-                </select></td>
-            </tr>
-            <tr>
-                <th>Breed</th>
-                <td><input type="text" th:field="*{breed}"></td>
-            </tr>
-            <tr>
-                <th>Birth Day</th>
-                <td><input type="text" th:field="*{birthDay}"></td>
-            </tr>
-        </table>
-        <input type="submit" value="Update">
+        <fieldset>
+            <div class="form-group">
+                <label for="name" class="col-lg-2 control-label">Name</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="name" th:field="*{name}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="speciesId" class="col-lg-2 control-label">Species</label>
+                <div class="col-lg-10">
+                    <select class="form-control" id="speciesId" th:field="*{speciesId}">
+                        <option th:each="s : ${species}" th:value="${s.id}" th:text="${s.name}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="breed" class="col-lg-2 control-label">Breed</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="breed" th:field="*{breed}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="birthDay" class="col-lg-2 control-label">Birth Day</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="birthDay" th:field="*{birthDay}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-lg-10">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </fieldset>
     </form>
 </div>
 

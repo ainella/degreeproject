@@ -19,11 +19,17 @@ public class ClinicService {
         String query = "SELECT * FROM CLINIC";
         return jdbcTemplate.query(query, new Clinic.Mapper());
     }
-    public void saveClinic(Clinic clinic){
-        jdbcTemplate.update("update clinic \n" +
-                "set name = ?, email = ?,phone = ?, address = ?\n" +
-                "where id = ?",clinic.getName(),clinic.getEmail(),clinic.getPhone(),clinic.getAddress(),clinic.getId());
+    public void saveClinic(Clinic clinic) {
+        if (clinic.getId() == null) {
+            jdbcTemplate.update("insert into clinic (owner_id,name, email,phone, address) values(?,?,?,?,?)",
+                    clinic.getOwnerId(), clinic.getName(), clinic.getEmail(), clinic.getPhone(), clinic.getAddress());
+        } else {
+            jdbcTemplate.update("update clinic \n" +
+                    "set name = ?, email = ?,phone = ?, address = ?\n" +
+                    "where id = ?", clinic.getName(), clinic.getEmail(), clinic.getPhone(), clinic.getAddress(), clinic.getId());
+        }
     }
+
     public List<Clinic> getListByOwnerId(Integer ownerId){
         String query = "select * from clinic where owner_id = ? ";
         return jdbcTemplate.query(query,new Clinic.Mapper(), ownerId);

@@ -7,11 +7,11 @@
 
 
 <div class="container">
-    <div th:if="clinic == null">
+    <div th:if="${clinic == null}">
         <a th:href="@{/owner/clinic/edit}" class="btn btn-primary">Register your clinic</a>
     </div>
 
-    <div th:if="clinic != null">
+    <div th:if="${clinic != null}">
         <h2>Clinic</h2>
         <table class="table table-bordered table-striped">
             <tr>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <th>Address</th>
-                <td><span th:field="${clinic.address}"></span></td>
+                <td><span th:text="${clinic.address}"></span></td>
             </tr>
         </table>
         <div>
@@ -50,7 +50,7 @@
                 <td colspan="5"> No Appointments </td>
             </tr>
             <tr th:each="appointment : ${appointments}">
-                <td><a th:href="@{/reception/appointmentId/{id}(id=${appointment.id})}"><span th:text="${appointment.id}"> </span></a></td>
+                <td><a th:href="@{/reception/appointment/{id}(id=${appointment.id})}"><span th:text="${appointment.id}"> </span></a></td>
                 <td><span th:text="${appointment.speciesName}"> </span></td>
                 <td><span th:text="${appointment.petName}"> </span></td>
                 <td><span th:text="${appointment.date}"> </span></td>

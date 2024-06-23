@@ -22,7 +22,7 @@
         </tr>
         <tr>
             <th>Address</th>
-            <td><span th:field="${clinic.address}"></span></td>
+            <td><span th:text="${clinic.address}"></span></td>
         </tr>
     </table>
     <a th:href="@{/appointment?clinicId={id}(id=${clinic.id})}" class="btn btn-primary">Make an appointment</a>

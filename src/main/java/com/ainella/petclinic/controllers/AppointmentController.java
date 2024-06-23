@@ -50,14 +50,14 @@ public class AppointmentController {
     @GetMapping("/id/{id}/delete")
     public String removeAppointment(Principal principal, Model model,@PathVariable("id") Integer id){
         appointmentService.deleteAppointment(id);
-        return "redirect:/owner";
+        return "redirect:/owner/pets";
     }
 
 
     @PostMapping()
     public String saveAppointment(Model model, @ModelAttribute Appointment appointment) {
         appointmentService.saveAppointment(appointment);
-        return "redirect:/owner";
+        return "redirect:/owner/pets";
     }
 
 }

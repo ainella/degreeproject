@@ -7,9 +7,15 @@
 
 <div class="container content">
     <h1>Pet Clinic</h1>
-    <p>
+    <img style="float:right" height="300" src="home.png">
+    <h3>
         Welcome to the Pet Clinic application!
+    </h3>
+
+    <p>
+
     </p>
+
     <div th:if="${#authorization.expression('!isAuthenticated()')}">
         <p>
             Get started by signing up.
