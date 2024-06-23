@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="~{fragments/head :: head}"></head>
+<body>
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+
+<div class="container">
+    <div th:if="clinic == null">
+        <a th:href="@{/owner/clinic/edit}" class="btn btn-primary">Register your clinic</a>
+    </div>
+
+    <div th:if="clinic != null">
+        <h2>Clinic</h2>
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Name</th>
+                <td><span th:text="${clinic.name}"></span></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><span th:text="${clinic.email}"></span></td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td><span th:text="${clinic.phone}"></span></td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td><span th:field="${clinic.address}"></span></td>
+            </tr>
+        </table>
+        <div>
+            <a th:href="@{/owner/clinic/edit}" class="btn btn-default">Edit</a>
+        </div>
+
+
+        <h2>Appointments</h2>
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>#</th>
+                <th>Species</th>
+                <th>Pet Name</th>
+                <th>Date</th>
+                <th>Reason</th>
+            </tr>
+
+            <tr th:if="${appointments.empty}">
+                <td colspan="5"> No Appointments </td>
+            </tr>
+            <tr th:each="appointment : ${appointments}">
+                <td><a th:href="@{/reception/appointmentId/{id}(id=${appointment.id})}"><span th:text="${appointment.id}"> </span></a></td>
+                <td><span th:text="${appointment.speciesName}"> </span></td>
+                <td><span th:text="${appointment.petName}"> </span></td>
+                <td><span th:text="${appointment.date}"> </span></td>
+                <td><span th:text="${appointment.reason}"> </span></td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

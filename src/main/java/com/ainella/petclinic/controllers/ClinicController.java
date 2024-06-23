@@ -24,7 +24,8 @@ public class ClinicController {
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private ClinicService clinicService;
-    @GetMapping("")
+
+    @GetMapping("/list")
     public  String getList(Model model) {
         List<Clinic> clinics = clinicService.getList();
         model.addAttribute("clinics",clinics);
@@ -37,10 +38,5 @@ public class ClinicController {
         model.addAttribute("clinic",clinic);
 
         return "clinic";
-    }
-    @PostMapping("/")
-    public String saveClinic(Model model, @ModelAttribute Clinic clinic) {
-        clinicService.saveClinic(clinic);
-        return "redirect:/clinic/id/" + clinic.getId().toString();
     }
 }

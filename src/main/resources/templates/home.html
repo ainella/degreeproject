@@ -5,16 +5,18 @@
 
 <div th:replace="~{fragments/header :: header}"></div>
 
-<div class="container">
+<div class="container content">
     <h1>Pet Clinic</h1>
     <p>
         Welcome to the Pet Clinic application!
     </p>
-    <p>
-        Get started by signing up.
-    </p>
-    <div>
-        <a th:href="@{/signup}" class="btn btn-primary">Sign up</a>
+    <div th:if="${#authorization.expression('!isAuthenticated()')}">
+        <p>
+            Get started by signing up.
+        </p>
+        <div>
+            <a th:href="@{/signup}" class="btn btn-primary">Sign up</a>
+        </div>
     </div>
 </div>
 

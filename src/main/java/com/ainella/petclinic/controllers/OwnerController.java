@@ -38,41 +38,73 @@ public class OwnerController {
     @Autowired
     private AppointmentService appointmentService;
 
-    @GetMapping()
-    public String getOwner(Principal principal, Model model) {
+    //-- Profile ----
+    @GetMapping("/profile")
+    public String getProfile(Principal principal, Model model) {
         Owner owner = ownerService.getOwnerByUsername(principal.getName());
         if (owner == null) {
-            throw new ResponseStatusException(NOT_FOUND, "Unable to find owner");
+            throw new ResponseStatusException(NOT_FOUND, "Unable to find profile");
         }
-        model.addAttribute("owner",owner);
-        model.addAttribute("username",principal.getName());
-
-        List<Pet> pets = petService.getPetsByOwnerId(owner.getId());
-        model.addAttribute("pets",pets);
-        List<Appointment> appointments = appointmentService.getListByOwnerId(owner.getId());
-        model.addAttribute("appointments",appointments);
-
-        List<Clinic> clinics = clinicService.getListByOwnerId(owner.getId());
-        model.addAttribute("clinics",clinics);
-        return "owner";
+        model.addAttribute("owner", owner);
+        return "owner/profile";
     }
 
-    @GetMapping("/clinic/id/{id}")
-    public String getMyClinic(Principal principal,@PathVariable("id")Integer id, Model model)
-    {
-        Clinic clinic = clinicService.getClinic(id);
-        model.addAttribute("clinic",clinic);
-        List<Appointment> appointments = appointmentService.getListByClinicId(id);
-        model.addAttribute("appointments",appointments);
-        return "my_clinic";
-    }
-
-    @PostMapping()
+    @PostMapping("/profile")
     public String saveOwner(Model model, @ModelAttribute Owner owner) {
         jdbcTemplate.update("update owners \n" +
                 "set fullname = ?, address = ?,phone = ?, email = ?\n" +
-                "where id = ?",owner.getFullname(),owner.getAddress(),owner.getPhone(),owner.getEmail(),owner.getId());
-        return "redirect:/owner";
+                "where id = ?", owner.getFullname(),owner.getAddress(),owner.getPhone(),owner.getEmail(),owner.getId());
+        return "redirect:/owner/profile";
+    }
+
+    //-- Pets ----
+    @GetMapping("/pets")
+    public String getPets(Principal principal, Model model) {
+        Integer ownerId = ownerService.getOwnerIdByUsername(principal.getName());
+        List<Pet> pets = petService.getPetsByOwnerId(ownerId);
+        model.addAttribute("pets",pets);
+        List<Appointment> appointments = appointmentService.getListByOwnerId(ownerId);
+        model.addAttribute("appointments",appointments);
+        return "owner/pets";
+    }
+
+    //-- My Clinic ----
+    @GetMapping("/clinic")
+    public String getMyClinic(Principal principal, Model model)
+    {
+        Integer ownerId = ownerService.getOwnerIdByUsername(principal.getName());
+        List<Clinic> clinics = clinicService.getListByOwnerId(ownerId);
+        if (clinics.isEmpty()) {
+            model.addAttribute("clinic", null);
+        } else {
+            Clinic clinic = clinics.get(0);
+            model.addAttribute("clinic", clinic);
+            List<Appointment> appointments = appointmentService.getListByClinicId(clinic.getId());
+            model.addAttribute("appointments", appointments);
+        }
+        return "owner/my_clinic";
+    }
+
+    @GetMapping("/clinic/edit")
+    public String editMyClinic(Principal principal, Model model)
+    {
+        Integer ownerId = ownerService.getOwnerIdByUsername(principal.getName());
+        List<Clinic> clinics = clinicService.getListByOwnerId(ownerId);
+        Clinic clinic;
+        if (clinics.isEmpty()) {
+            clinic = new Clinic();
+            clinic.setOwnerId(ownerId);
+        } else {
+            clinic = clinics.get(0);
+        }
+        model.addAttribute("clinic", clinic);
+        return "owner/edit_clinic";
+    }
+
+    @PostMapping("/clinic")
+    public String saveClinic(Model model, @ModelAttribute Clinic clinic) {
+        clinicService.saveClinic(clinic);
+        return "redirect:/owner/clinic";
     }
 
 }

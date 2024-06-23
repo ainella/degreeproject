@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 public class Clinic {
     private Integer id;
+    private Integer ownerId;
     private String name;
     private String email;
     private String phone;
@@ -18,6 +19,14 @@ public class Clinic {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Integer ownerId) {
+        this.ownerId = ownerId;
     }
 
     public String getName() {
@@ -58,6 +67,7 @@ public class Clinic {
             Clinic clinic = new Clinic();
 
             clinic.setId(rs.getInt("id"));
+            clinic.setOwnerId(rs.getInt("owner_id"));
             clinic.setName(rs.getString("name"));
             clinic.setEmail(rs.getString("email"));
             clinic.setPhone(rs.getString("phone"));

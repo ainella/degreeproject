@@ -6,17 +6,23 @@
     <nav class="navbar navbar-inverse" th:fragment="header">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Pet Clinic</a>
+                <a class="navbar-brand" th:href="@{/}">Pet Clinic</a>
             </div>
             <ul class="nav navbar-nav">
                 <li th:classappend="${module == 'home' ? 'active' : ''}">
                     <a th:href="@{/}">Home</a>
                 </li>
                 <li th:classappend="${module == 'clinic' ? 'active' : ''}">
-                    <a th:href="@{/clinic}">Clinics</a>
+                    <a th:href="@{/clinic/list}">Clinics</a>
                 </li>
-                <li th:classappend="${module == 'owner' ? 'active' : ''}">
-                    <a th:href="@{/owner}">Personal Account</a>
+                <li th:classappend="${module == 'owner/pets' ? 'active' : ''}">
+                    <a th:href="@{/owner/pets}">My Pets</a>
+                </li>
+                <li th:classappend="${module == 'owner/clinic' ? 'active' : ''}">
+                    <a th:href="@{/owner/clinic}">My Clinic</a>
+                </li>
+                <li th:classappend="${module == 'owner/profile' ? 'active' : ''}">
+                    <a th:href="@{/owner/profile}">My Profile</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

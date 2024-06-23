@@ -26,7 +26,7 @@ public class SignupController {
     @PostMapping()
     public String createOwner(Model model, @ModelAttribute Owner owner) {
         ownerService.createOwner(owner);
-        return "redirect:/owner";
+        return "redirect:/owner/pets";
     }
 
 }
