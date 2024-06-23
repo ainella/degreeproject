@@ -27,6 +27,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/signup").permitAll()
                         .requestMatchers("/clinic").permitAll()
                         .requestMatchers("/clinic/**").permitAll()
+                        .requestMatchers("/home.png").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
