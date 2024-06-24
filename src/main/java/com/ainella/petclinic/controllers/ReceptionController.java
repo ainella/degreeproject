@@ -34,6 +34,7 @@ public class ReceptionController {
         record.setAppointmentId(id);
         model.addAttribute("record",record);
         model.addAttribute("appointment",appointment);
+        model.addAttribute("records", clinicRecordService.getListByPetId(id));
         return "reception";
     }
 

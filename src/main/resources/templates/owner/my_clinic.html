@@ -6,7 +6,7 @@
 <div th:replace="~{fragments/header :: header}"></div>
 
 
-<div class="container">
+<div class="container content">
     <div th:if="${clinic == null}">
         <a th:href="@{/owner/clinic/edit}" class="btn btn-primary">Register your clinic</a>
     </div>

@@ -5,8 +5,8 @@
 
 <div th:replace="~{fragments/header :: header}"></div>
 
-<div class="container">
-    <h1>Pet Data</h1>
+<div class="container content">
+    <h2>Pet Data</h2>
     <form class="form-narrow form-horizontal" method="post" th:action="@{/pet}" th:object="${pet}">
         <input type="hidden" th:field="*{id}">
         <input type="hidden" th:field="*{ownerId}">
@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label for="birthDay" class="col-lg-2 control-label">Birth Day</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="birthDay" th:field="*{birthDay}" />
+                    <input type="date" class="form-control" id="birthDay" th:field="*{birthDay}" />
                 </div>
             </div>
             <div class="form-group">
@@ -44,6 +44,27 @@
             </div>
         </fieldset>
     </form>
+
+    <h2>Clinical Records</h2>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>#</th>
+            <th>Date</th>
+            <th>Diagnose</th>
+            <th>Treatment</th>
+        </tr>
+
+        <tr th:if="${records == null || records.empty}">
+            <td colspan="4"> No medical records yet </td>
+        </tr>
+        <tr th:each="record : ${records}">
+            <td><span th:text="${record.id}"></span></td>
+            <td><span th:text="${record.date}"></span></td>
+            <td><span th:text="${record.diagnose}"></span></td>
+            <td><span th:text="${record.treatment}"></span></td>
+        </tr>
+    </table>
+
 </div>
 
 <div th:replace="~{fragments/footer :: footer}"></div>

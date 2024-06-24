@@ -1,6 +1,5 @@
 package com.ainella.petclinic.services;
 
-import com.ainella.petclinic.models.Appointment;
 import com.ainella.petclinic.models.ClinicRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,15 +9,17 @@ import java.util.List;
 
 @Service
 public class ClinicRecordService {
-
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-
-
-    public List<ClinicRecord> getListById(Integer id) {
+    public ClinicRecord getById(Integer id) {
         String query = "select * from clinic_records where id = ?";
-        return jdbcTemplate.query(query, new ClinicRecord.Mapper(),id);
+        return jdbcTemplate.queryForObject(query, new ClinicRecord.Mapper(), id);
+    }
+
+    public List<ClinicRecord> getListByPetId(Integer id) {
+        String query = "select * from clinic_records where pet_id = ?";
+        return jdbcTemplate.query(query, new ClinicRecord.Mapper(), id);
     }
 
     public void saveClinicRecord(ClinicRecord clinicRecord) {

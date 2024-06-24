@@ -30,13 +30,13 @@ public class ClinicController {
         List<Clinic> clinics = clinicService.getList();
         model.addAttribute("clinics",clinics);
 
-        return "clinics";
+        return "clinics/clinics";
     }
     @GetMapping("/id/{id}")
     public String getClinicById(@PathVariable("id")Integer id, Model model) {
         Clinic clinic = clinicService.getClinic(id);
         model.addAttribute("clinic",clinic);
 
-        return "clinic";
+        return "clinics/clinic";
     }
 }
