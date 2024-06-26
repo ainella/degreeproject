@@ -13,12 +13,13 @@ public class AppointmentService {
     private JdbcTemplate jdbcTemplate;
 
     public Appointment getAppointment(Integer id) {
-        String query = "select a.* , p.\"name\" as pet_name, c.\"name\" as clinic_name , s.\"name\" as species_name\n" +
-                "from appointments a \n" +
-                "join pets p on p.id = a.pet_id \n" +
-                "join clinic c on c.id = a.clinic_id \n" +
-                "join species s on s.id = p.species_id \n" +
-                "where a.id = ?";
+        String query = """
+                select a.* , p."name" as pet_name, c."name" as clinic_name , s."name" as species_name
+                from appointments a
+                join pets p on p.id = a.pet_id
+                join clinic c on c.id = a.clinic_id
+                join species s on s.id = p.species_id
+                where a.id = ?""";
         return jdbcTemplate.queryForObject(query, new Appointment.Mapper(), id);
     }
 
