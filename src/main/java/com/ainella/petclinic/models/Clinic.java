@@ -11,7 +11,8 @@ public class Clinic {
     private String name;
     private String email;
     private String phone;
-    private String address;
+    private Address address;
+    private Integer addressId;
 
     public Integer getId() {
         return id;
@@ -53,12 +54,20 @@ public class Clinic {
         this.phone = phone;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public Integer getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
     }
 
     public static class Mapper implements RowMapper<Clinic> {
@@ -71,7 +80,7 @@ public class Clinic {
             clinic.setName(rs.getString("name"));
             clinic.setEmail(rs.getString("email"));
             clinic.setPhone(rs.getString("phone"));
-            clinic.setAddress(rs.getString("address"));
+            clinic.setAddressId(rs.getInt("address_id"));
             return clinic;
         }
     }

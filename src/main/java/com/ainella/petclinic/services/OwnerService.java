@@ -29,9 +29,16 @@ public class OwnerService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    AddressService addressService;
+
     public Owner getOwnerByUsername(String username) {
         String query = "SELECT * FROM OWNERS WHERE username = ?";
-        return jdbcTemplate.queryForObject(query, new Owner.Mapper(), username);
+        Owner owner = jdbcTemplate.queryForObject(query, new Owner.Mapper(), username);
+        if(owner != null) {
+            owner.setAddress(addressService.getAddress(owner.getAddressId()));
+        }
+        return owner;
     }
 
     public Integer getOwnerIdByUsername(String username) {

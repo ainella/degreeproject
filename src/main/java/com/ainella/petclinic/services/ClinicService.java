@@ -1,6 +1,7 @@
 package com.ainella.petclinic.services;
 
 import com.ainella.petclinic.models.Clinic;
+import com.ainella.petclinic.models.Owner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -11,13 +12,24 @@ public class ClinicService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    AddressService addressService;
+
     public Clinic getClinic(Integer id) {
         String query = "SELECT * FROM CLINIC WHERE ID = ?";
-        return jdbcTemplate.queryForObject(query, new Clinic.Mapper(), id);
+        Clinic clinic = jdbcTemplate.queryForObject(query, new Clinic.Mapper(), id);
+        if (clinic != null) {
+            clinic.setAddress(addressService.getAddress(clinic.getAddressId()));
+        }
+        return clinic;
     }
     public List<Clinic> getList() {
         String query = "SELECT * FROM CLINIC";
-        return jdbcTemplate.query(query, new Clinic.Mapper());
+        List<Clinic> clinics = jdbcTemplate.query(query, new Clinic.Mapper());
+        for(Clinic clinic: clinics ) {
+            clinic.setAddress(addressService.getAddress(clinic.getAddressId()));
+        }
+        return clinics;
     }
     public void saveClinic(Clinic clinic) {
         if (clinic.getId() == null) {
@@ -32,6 +44,10 @@ public class ClinicService {
 
     public List<Clinic> getListByOwnerId(Integer ownerId){
         String query = "select * from clinic where owner_id = ? ";
-        return jdbcTemplate.query(query,new Clinic.Mapper(), ownerId);
+        List<Clinic> clinics = jdbcTemplate.query(query,new Clinic.Mapper(), ownerId);
+        for(Clinic clinic: clinics ) {
+            clinic.setAddress(addressService.getAddress(clinic.getAddressId()));
+        }
+        return clinics;
     }
 }

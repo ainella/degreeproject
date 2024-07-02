@@ -8,13 +8,15 @@ import java.sql.SQLException;
 public class Owner {
     private Integer id;
     private String fullname;
-    private String address;
+    private Address address;
     private String phone;
     private String email;
 
     private String username;
 
     private String password;
+
+    private Integer addressId;
 
 
     public Integer getId() {
@@ -33,11 +35,11 @@ public class Owner {
         this.fullname = fullname;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
@@ -73,13 +75,21 @@ public class Owner {
         this.password = password;
     }
 
+    public Integer getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
+    }
+
     public static class Mapper implements RowMapper<Owner> {
         @Override
         public Owner mapRow(ResultSet rs, int rowNum) throws SQLException {
             Owner owner = new Owner();
             owner.setId(rs.getInt("id"));
             owner.setFullname(rs.getString("fullname"));
-            owner.setAddress(rs.getString("address"));
+            owner.setAddressId(rs.getInt("address_id"));
             owner.setPhone(rs.getString("phone"));
             owner.setEmail(rs.getString("email"));
             owner.setUsername(rs.getString("username"));
