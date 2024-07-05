@@ -48,6 +48,7 @@ public class OwnerService {
 
     @Transactional
     public void createOwner(Owner owner) {
+        Integer addressId = addressService.saveAddress(owner.getAddress());
         //Create the user
         UserDetails user = User.builder()
                 .username(owner.getUsername())
@@ -57,9 +58,20 @@ public class OwnerService {
         //Save the user
         userDetailsManager.createUser(user);
         //Save owner profile
-        jdbcTemplate.update("insert into owners(fullname, address, phone, email, username)\n" +
+        jdbcTemplate.update("insert into owners(firstname,lastname,middlename, address_id, phone, email, username)\n" +
                 "values(?,?,?,?,?)",
-                owner.getFullname(), owner.getAddress(), owner.getPhone(), owner.getEmail(), owner.getUsername());
+                owner.getFirstname(),owner.getLastname(),owner.getMiddlename(),addressId, owner.getPhone(), owner.getEmail(), owner.getUsername());
     }
 
+    @Transactional
+    public void updateOwner(Owner owner) {
+        //Save address
+        Integer addressId = addressService.saveAddress(owner.getAddress());
+        //Save owner profile
+        jdbcTemplate.update("""
+                update owners
+                set firstname = ?, lastname = ?, middlename = ?, address_id = ?, phone = ?, email = ?
+                where id = ?""",
+                owner.getFirstname(),owner.getLastname(),owner.getMiddlename(), addressId, owner.getPhone(), owner.getEmail(), owner.getId());
+    }
 }

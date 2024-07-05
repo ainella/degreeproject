@@ -5,6 +5,7 @@ import com.ainella.petclinic.models.Owner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
@@ -31,14 +32,17 @@ public class ClinicService {
         }
         return clinics;
     }
+
+    @Transactional
     public void saveClinic(Clinic clinic) {
+        Integer addressId = addressService.saveAddress(clinic.getAddress());
         if (clinic.getId() == null) {
-            jdbcTemplate.update("insert into clinic (owner_id,name, email,phone, address) values(?,?,?,?,?)",
-                    clinic.getOwnerId(), clinic.getName(), clinic.getEmail(), clinic.getPhone(), clinic.getAddress());
+            jdbcTemplate.update("insert into clinic (owner_id,name, email,phone, address_id) values(?,?,?,?,?)",
+                    clinic.getOwnerId(), clinic.getName(), clinic.getEmail(), clinic.getPhone(), addressId);
         } else {
             jdbcTemplate.update("update clinic \n" +
-                    "set name = ?, email = ?,phone = ?, address = ?\n" +
-                    "where id = ?", clinic.getName(), clinic.getEmail(), clinic.getPhone(), clinic.getAddress(), clinic.getId());
+                    "set name = ?, email = ?,phone = ?, address_id = ?\n" +
+                    "where id = ?", clinic.getName(), clinic.getEmail(), clinic.getPhone(),addressId, clinic.getId());
         }
     }
 

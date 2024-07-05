@@ -7,7 +7,9 @@ import java.sql.SQLException;
 
 public class Owner {
     private Integer id;
-    private String fullname;
+    private String firstname;
+    private String lastname;
+    private String middlename;
     private Address address;
     private String phone;
     private String email;
@@ -27,12 +29,28 @@ public class Owner {
         this.id = id;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getMiddlename() {
+        return middlename;
+    }
+
+    public void setMiddlename(String middlename) {
+        this.middlename = middlename;
     }
 
     public Address getAddress() {
@@ -88,7 +106,9 @@ public class Owner {
         public Owner mapRow(ResultSet rs, int rowNum) throws SQLException {
             Owner owner = new Owner();
             owner.setId(rs.getInt("id"));
-            owner.setFullname(rs.getString("fullname"));
+            owner.setFirstname(rs.getString("firstname"));
+            owner.setLastname(rs.getString("lastname"));
+            owner.setMiddlename(rs.getString("middlename"));
             owner.setAddressId(rs.getInt("address_id"));
             owner.setPhone(rs.getString("phone"));
             owner.setEmail(rs.getString("email"));

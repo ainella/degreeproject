@@ -53,7 +53,7 @@ public class OwnerController {
     public String saveOwner(Model model, @ModelAttribute Owner owner) {
         jdbcTemplate.update("update owners \n" +
                 "set fullname = ?, address = ?,phone = ?, email = ?\n" +
-                "where id = ?", owner.getFullname(),owner.getAddress(),owner.getPhone(),owner.getEmail(),owner.getId());
+                "where id = ?", owner.getFirstname(),owner.getLastname(),owner.getMiddlename(),owner.getAddress(),owner.getPhone(),owner.getEmail(),owner.getId());
         return "redirect:/owner/profile";
     }
 
@@ -106,5 +106,6 @@ public class OwnerController {
         clinicService.saveClinic(clinic);
         return "redirect:/owner/clinic";
     }
+
 
 }

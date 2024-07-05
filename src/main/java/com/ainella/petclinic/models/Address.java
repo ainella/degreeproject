@@ -7,7 +7,8 @@ import java.sql.SQLException;
 
 public class Address {
     private Integer id;
-    private String country;
+    private String countryName;
+    private String countryCode;
     private String region;
     private String city;
     private String zipCode;
@@ -22,12 +23,20 @@ public class Address {
         this.id = id;
     }
 
-    public String getCountry() {
-        return country;
+    public String getCountryName() {
+        return countryName;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
     public String getRegion() {
@@ -76,7 +85,8 @@ public class Address {
             Address address = new Address();
 
             address.setId(rs.getInt("id"));
-            address.setCountry(rs.getString("country"));
+            address.setCountryName(rs.getString("country_name"));
+            address.setCountryCode(rs.getString("country_code"));
             address.setRegion(rs.getString("region"));
             address.setCity(rs.getString("city"));
             address.setZipCode(rs.getString("zip_code"));

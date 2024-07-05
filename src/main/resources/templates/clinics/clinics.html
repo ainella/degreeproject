@@ -22,7 +22,15 @@
             <td><a th:href="@{/clinic/id/{id}(id=${clinic.id})}"><span th:text="${clinic.name}"> </span></a></td>
             <td><span th:text="${clinic.email}"> </span></td>
             <td><span th:text="${clinic.phone}"> </span></td>
-            <td><span th:text="${clinic.address}"> </span></td>
+            <td>
+                <span th:if="${clinic.address != null}" th:text="|${clinic.address.country_name},
+                ${clinic.address.country_name.region}, ${clinic.address.country_name.region.city}
+                , ${clinic.address.country_name.region.city.zip_code},
+                ${clinic.address.country_name.region.city.zip_code.address_line_1},
+                ${clinic.address.country_name.region.city.zip_code.address_line_1,address_line_2}|">
+                </span>
+                <span th:if="${clinic.address == null}"> - </span>
+            </td>
         </tr>
     </table>
 </div>
