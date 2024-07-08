@@ -30,7 +30,7 @@ public class ReceptionController {
     public String newRecord(Principal principal, Model model, @PathVariable Integer id) {
         Appointment appointment = appointmentService.getAppointment(id);
         ClinicRecord record = new ClinicRecord();
-        record.setPetId(appointment.getPetId());
+        record.setAppointmentId(appointment.getId());
         record.setAppointmentId(id);
         model.addAttribute("record",record);
         model.addAttribute("appointment",appointment);

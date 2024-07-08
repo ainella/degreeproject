@@ -72,6 +72,7 @@ public class OwnerService {
                 update owners
                 set firstname = ?, lastname = ?, middlename = ?, address_id = ?, phone = ?, email = ?
                 where id = ?""",
-                owner.getFirstname(),owner.getLastname(),owner.getMiddlename(), addressId, owner.getPhone(), owner.getEmail(), owner.getId());
+                owner.getFirstname(),owner.getLastname(),owner.getMiddlename(), addressId, owner.getPhone(),
+                owner.getEmail(), owner.getId());
     }
 }

@@ -19,6 +19,9 @@ public class AddressService {
     private JdbcTemplate jdbcTemplate;
 
     public Address getAddress(Integer id) {
+        if(id==null){
+            return null;
+        }
         String query = """
                 select
                         id,
@@ -44,24 +47,9 @@ public class AddressService {
         }
         if(address.getId()==null) {
             String sql = "insert into address (country_code,region,city,zip_code," +
-                    "address_line_1,address_line_2) values(?,?,?,?,?,?,?)";
-            KeyHolder keyHolder = new GeneratedKeyHolder();
-
-            jdbcTemplate.update(
-                    new PreparedStatementCreator() {
-                        public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                            PreparedStatement statement = connection.prepareStatement(sql);
-                            statement.setString(1, address.getCountryCode());
-                            statement.setString(2, address.getRegion());
-                            statement.setString(3, address.getCity());
-                            statement.setString(4, address.getZipCode());
-                            statement.setString(5, address.getAddressLine1());
-                            statement.setString(6, address.getAddressLine2());
-                            return statement;
-                        }
-                    }, keyHolder);
-
-            return keyHolder.getKey().intValue();
+                    "address_line_1,address_line_2) values(?,?,?,?,?,?) returning id";
+            return jdbcTemplate.queryForObject(sql,new Object[] {address.getCountryCode(),address.getRegion(),address.getCity(),
+                address.getZipCode(),address.getAddressLine1(),address.getAddressLine2()},Integer.class);
         } else {
             jdbcTemplate.update("update address \n" +
                     "set country_code = ?,region = ?, city = ?, zip_code = ?, address_line_1 = ?, address_line_2 = ?\n" +

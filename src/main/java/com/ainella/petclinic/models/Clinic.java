@@ -81,6 +81,9 @@ public class Clinic {
             clinic.setEmail(rs.getString("email"));
             clinic.setPhone(rs.getString("phone"));
             clinic.setAddressId(rs.getInt("address_id"));
+            if(rs.wasNull()) {
+                clinic.setAddressId(null);
+            }
             return clinic;
         }
     }

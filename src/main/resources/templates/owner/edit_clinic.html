@@ -30,18 +30,17 @@
                     <input type="text" class="form-control" id="phone" th:field="*{phone}" />
                 </div>
             </div>
-            <div class="form-group">
-                <label for="address" class="col-lg-2 control-label">Address</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="address" th:field="*{address}" />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-lg-offset-2 col-lg-10">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-            </div>
+
         </fieldset>
+
+        <fieldset th:replace="~{fragments/address :: address}"></fieldset>
+
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+
     </form>
 </div>
 

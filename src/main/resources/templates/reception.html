@@ -44,7 +44,6 @@
 
     <form class="form-narrow form-horizontal" method="post" th:action="@{/reception}" th:object="${record}">
         <input type="hidden" th:field="*{id}">
-        <input type="hidden" th:field="*{petId}">
         <input type="hidden" th:field="*{appointmentId}">
         <fieldset>
             <legend>Write new clinical record</legend>

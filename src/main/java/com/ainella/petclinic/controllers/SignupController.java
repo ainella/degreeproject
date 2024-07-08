@@ -1,6 +1,7 @@
 package com.ainella.petclinic.controllers;
 
 import com.ainella.petclinic.models.Owner;
+import com.ainella.petclinic.services.CountryService;
 import com.ainella.petclinic.services.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,9 +18,13 @@ public class SignupController {
     @Autowired
     private OwnerService ownerService;
 
+    @Autowired
+    private CountryService countryService;
+
     @GetMapping()
     public String signupForm(Model model) {
         model.addAttribute("owner", new Owner());
+        model.addAttribute("countryList",countryService.getList());
         return "signup";
     }
 

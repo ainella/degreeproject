@@ -8,7 +8,6 @@ import java.util.Date;
 
 public class ClinicRecord {
     Integer id;
-    Integer petId;
     Date date;
     String diagnose;
     String treatment;
@@ -19,14 +18,6 @@ public class ClinicRecord {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getPetId() {
-        return petId;
-    }
-
-    public void setPetId(Integer petId) {
-        this.petId = petId;
     }
 
     public Date getDate() {
@@ -67,7 +58,7 @@ public class ClinicRecord {
             ClinicRecord clinicRecord = new ClinicRecord();
 
             clinicRecord.setId(rs.getInt("id"));
-            clinicRecord.setPetId(rs.getInt("pet_id"));
+            clinicRecord.setAppointmentId(rs.getInt("appointment_id"));
             clinicRecord.setDate(rs.getDate("date_"));
             clinicRecord.setDiagnose(rs.getString("diagnose"));
             clinicRecord.setTreatment(rs.getString("treatment"));

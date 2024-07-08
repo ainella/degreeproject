@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+
+<fieldset th:fragment="address">
+    <legend>Residence Address</legend>
+    <div class="form-group">
+        <label for="address_country" class="col-lg-2 control-label">Country</label>
+        <div class="col-lg-10">
+            <select class="form-control" id="address_country" th:field="*{address.countryCode}">
+                <option th:each="s : ${countryList}" th:value="${s.code}" th:text="${s.name}"></option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="address_region" class="col-lg-2 control-label">Region</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="address_region" th:field="*{address.region}" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="address_city" class="col-lg-2 control-label">City</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="address_city" th:field="*{address.city}" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="address_zipCode" class="col-lg-2 control-label">Zip Code</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="address_zipCode" th:field="*{address.zipCode}" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="address_line_1" class="col-lg-2 control-label">Address Line 1</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="address_line_1" th:field="*{address.addressLine1}" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="address_line_2" class="col-lg-2 control-label">Address Line 2</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="address_line_2" th:field="*{address.addressLine2}" />
+        </div>
+    </div>
+</fieldset>
+
+
+</body>
+</html>

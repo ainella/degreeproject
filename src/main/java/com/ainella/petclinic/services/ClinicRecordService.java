@@ -18,19 +18,24 @@ public class ClinicRecordService {
     }
 
     public List<ClinicRecord> getListByPetId(Integer id) {
-        String query = "select * from clinic_records where pet_id = ?";
+        String query = """
+                select cr.id ,cr.date_ ,cr.diagnose ,cr.treatment ,cr.appointments_id
+                from clinic_records cr
+                join appointments a on a.id = cr.appointments_id
+                where a.pet_id = ?
+                """;
         return jdbcTemplate.query(query, new ClinicRecord.Mapper(), id);
     }
 
     public void saveClinicRecord(ClinicRecord clinicRecord) {
         if(clinicRecord.getId()==null) {
-            jdbcTemplate.update("insert into clinic_records (pet_id,date_,diagnose,treatment) values(?,?,?,?)",
-                    clinicRecord.getPetId(),clinicRecord.getDate(),clinicRecord.getDiagnose(),clinicRecord.getTreatment());
+            jdbcTemplate.update("insert into clinic_records (appointment_id,date_,diagnose,treatment) values(?,?,?,?)",
+                    clinicRecord.getAppointmentId(),clinicRecord.getDate(),clinicRecord.getDiagnose(),clinicRecord.getTreatment());
         }
         else {
             jdbcTemplate.update("update clinic_records \n" +
-                    "set pet_id = ?, date_ = ?,diagnose = ?, treatment = ?\n" +
-                    "where id = ?",clinicRecord.getPetId(),clinicRecord.getDate(),clinicRecord.getDiagnose(),
+                    "set  appointment_id = ?,date_ = ?,diagnose = ?, treatment = ? \n" +
+                    "where id = ?",clinicRecord.getAppointmentId(),clinicRecord.getDate(),clinicRecord.getDiagnose(),
                     clinicRecord.getTreatment(),clinicRecord.getId());
         }
     }

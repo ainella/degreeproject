@@ -110,6 +110,9 @@ public class Owner {
             owner.setLastname(rs.getString("lastname"));
             owner.setMiddlename(rs.getString("middlename"));
             owner.setAddressId(rs.getInt("address_id"));
+            if(rs.wasNull()){
+                owner.setAddressId(null);
+            }
             owner.setPhone(rs.getString("phone"));
             owner.setEmail(rs.getString("email"));
             owner.setUsername(rs.getString("username"));

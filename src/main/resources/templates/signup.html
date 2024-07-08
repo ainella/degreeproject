@@ -22,17 +22,26 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="fullname" class="col-lg-2 control-label">Full Name</label>
+                <label for="firstname" class="col-lg-2 control-label">Firstname</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="fullname" th:field="*{fullname}" />
+                    <input type="text" class="form-control" id="firstname" th:field="*{firstname}" />
                 </div>
             </div>
+
             <div class="form-group">
-                <label for="address" class="col-lg-2 control-label">Address</label>
+                <label for="lastname" class="col-lg-2 control-label">Lastname</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="address" th:field="*{address}" />
+                    <input type="text" class="form-control" id="lastname" th:field="*{lastname}" />
                 </div>
             </div>
+
+            <div class="form-group">
+                <label for="middlename" class="col-lg-2 control-label">Middlename</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="middlename" th:field="*{middlename}" />
+                </div>
+            </div>
+
             <div class="form-group">
                 <label for="email" class="col-lg-2 control-label">Email</label>
                 <div class="col-lg-10">
@@ -46,17 +55,19 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="col-lg-offset-2 col-lg-10">
-                    <button type="submit" class="btn btn-primary">Sign up</button>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-lg-offset-2 col-lg-10">
-                    <p>Already have an account? <a th:href="@{/signin}">Sign In</a></p>
-                </div>
-            </div>
         </fieldset>
+
+        <fieldset th:replace="~{fragments/address :: address}"></fieldset>
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <button type="submit" class="btn btn-primary">Sign up</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <p>Already have an account? <a th:href="@{/signin}">Sign In</a></p>
+            </div>
+        </div>
     </form>
 </div>
 

@@ -4,10 +4,7 @@ import com.ainella.petclinic.models.Appointment;
 import com.ainella.petclinic.models.Clinic;
 import com.ainella.petclinic.models.Owner;
 import com.ainella.petclinic.models.Pet;
-import com.ainella.petclinic.services.AppointmentService;
-import com.ainella.petclinic.services.ClinicService;
-import com.ainella.petclinic.services.OwnerService;
-import com.ainella.petclinic.services.PetService;
+import com.ainella.petclinic.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -38,6 +35,9 @@ public class OwnerController {
     @Autowired
     private AppointmentService appointmentService;
 
+    @Autowired
+    private CountryService countryService;
+
     //-- Profile ----
     @GetMapping("/profile")
     public String getProfile(Principal principal, Model model) {
@@ -46,14 +46,13 @@ public class OwnerController {
             throw new ResponseStatusException(NOT_FOUND, "Unable to find profile");
         }
         model.addAttribute("owner", owner);
+        model.addAttribute("countryList",countryService.getList());
         return "owner/profile";
     }
 
     @PostMapping("/profile")
     public String saveOwner(Model model, @ModelAttribute Owner owner) {
-        jdbcTemplate.update("update owners \n" +
-                "set fullname = ?, address = ?,phone = ?, email = ?\n" +
-                "where id = ?", owner.getFirstname(),owner.getLastname(),owner.getMiddlename(),owner.getAddress(),owner.getPhone(),owner.getEmail(),owner.getId());
+        ownerService.updateOwner(owner);
         return "redirect:/owner/profile";
     }
 
@@ -98,6 +97,7 @@ public class OwnerController {
             clinic = clinics.get(0);
         }
         model.addAttribute("clinic", clinic);
+        model.addAttribute("countryList",countryService.getList());
         return "owner/edit_clinic";
     }
 

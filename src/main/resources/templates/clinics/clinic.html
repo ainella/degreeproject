@@ -22,7 +22,15 @@
         </tr>
         <tr>
             <th>Address</th>
-            <td><span th:text="${clinic.address}"></span></td>
+            <td>
+                <span th:if="${clinic.address != null}" th:text="|${clinic.address.country_name},
+                ${clinic.address.country_name.region}, ${clinic.address.country_name.region.city}
+                , ${clinic.address.country_name.region.city.zip_code},
+                ${clinic.address.country_name.region.city.zip_code.address_line_1},
+                ${clinic.address.country_name.region.city.zip_code.address_line_1,address_line_2}|">
+                </span>
+                <span th:if="${clinic.address == null}"> - </span>
+            </td>
         </tr>
     </table>
     <a th:href="@{/appointment?clinicId={id}(id=${clinic.id})}" class="btn btn-primary">Make an appointment</a>
