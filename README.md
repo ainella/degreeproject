@@ -3,7 +3,7 @@ Degree Project for Bachelor
 PetClinic
 Welcome to PetClinic, a modern web application designed to manage pet-related information efficiently. Inspired by the classic Spring PetClinic, this project aims to provide a comprehensive solution for veterinary clinics, pet owners, and administrators.
 
-![Screenshot](https://github.com/Ainella/PetClinic/blob/main/Screen.png
+![Screenshot](https://github.com/Ainella/PetClinic/blob/main/Screen.png)
 
 Features
 Manage Pet Information: Add, update, and delete pet profiles, including species, breed, and medical history.
