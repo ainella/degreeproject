@@ -23,4 +23,7 @@ PetClinic is a web application designed to manage pet-related information.
 - Run scripts file
 - Build applicaton (mvn package)
 
+## Usage
+Run application
+
 
