@@ -24,6 +24,6 @@ PetClinic is a web application designed to manage pet-related information.
 - Build applicaton (mvn package)
 
 ## Usage
-Run application (java - jar target/petclinic.jar)
+Run application (java -jar target/petclinic.jar)
 
 
