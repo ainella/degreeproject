@@ -21,6 +21,6 @@ PetClinic is a web application designed to manage pet-related information.
 - Download and install Maven
 - Create database
 - Run scripts file
-- Build applicaton 
+- Build applicaton (bash sudo apt update sudo apt install maven mvn -version)
 
 
