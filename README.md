@@ -13,10 +13,9 @@ PetClinic is a web application designed to manage pet-related information.
 
 ## Prerequisites
 - Java 17 or later version
-- Maven
-- PostgreSQL database
+- PostgreSQL server
 
-## Installation
+## Deployment
 - Clone repositiry
 - Download Java 17 or later version
 - 
