@@ -17,7 +17,10 @@ PetClinic is a web application designed to manage pet-related information.
 
 ## Deployment
 - Clone repositiry
-- Download Java 17 or later version
-- 
+- Download and install Java 17 or later version
+- Download and install Maven
+- Create database
+- Run scripts file
+- Build applicaton 
 
 
