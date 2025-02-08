@@ -1,4 +1,4 @@
-Degree Project for Bachelor 
+№Degree Project for Bachelor 
 
 PetClinic
 Welcome to PetClinic, a modern web application designed to manage pet-related information efficiently. Inspired by the classic Spring PetClinic, this project aims to provide a comprehensive solution for veterinary clinics, pet owners, and administrators.
