@@ -16,12 +16,12 @@ PetClinic is a web application designed to manage pet-related information.
 - PostgreSQL server
 
 ## Deployment
-- Clone repositiry
+- Clone the Repositiry
 - Download and install Java 17 or later version
 - Download and install Maven 
-- Create database
+- Create Database
 - Run scripts file
-- Build applicaton (mvn package)
+- Build Applicaton (mvn package)
 
 ## Usage
 - Run the Application:  java -jar target/petclinic-0.0.1.jar
