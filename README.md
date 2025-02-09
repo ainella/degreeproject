@@ -19,7 +19,7 @@ The PetClinic is a Web Application designed to manage pet-related information.
 - Clone the Repositiry
 - Download and install Java 17 or later version
 - Download and install Maven 
-- Create Database
+- Create the Database
 - Run scripts file
 - Build Applicaton (mvn package)
 
