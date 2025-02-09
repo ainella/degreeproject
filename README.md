@@ -11,6 +11,17 @@ The PetClinic is a Web Application designed to manage pet-related information.
 
 ![Screenshot](https://github.com/Ainella/PetClinic/blob/main/Screen.png)
 
+## Tools and Technologies
+-	Database: SQL, PostgreSQL, JDBC  
+-	Backend: standalone Java application with embedded web server (tomcat)   
+-	Frontend: HTML, CSS  
+-	Security: Spring Security, Basic Authentication   
+-	Version Control: Git, GitHub   
+-	IDE: IntelliJ IDEA (Community Edition)  
+-	Modeler: Visual Paradigm  
+-	Build Tools: Maven  
+-	Deployment: Docker, Jenkins  
+
 ## Prerequisites
 - Java 17 or later version
 - PostgreSQL server
