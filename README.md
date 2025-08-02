@@ -1,6 +1,4 @@
-# Degree Project for Bachelor 
-
-## PetClinic
+# PetClinic
 The PetClinic is a Web Application designed to manage pet-related information.
 
 ## Features
